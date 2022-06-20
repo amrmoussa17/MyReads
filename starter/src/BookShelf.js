@@ -7,7 +7,7 @@ function BookShelf(props) {
           {props.books
             .filter((book) => book.shelf === props.shelf)
             .map((book) => (
-              <li key={book.title}>
+              <li key={book.id}>
                 <div className="book">
                   <div className="book-top">
                     <div
@@ -19,7 +19,11 @@ function BookShelf(props) {
                       }}
                     ></div>
                     <div className="book-shelf-changer">
-                      <select>
+                      <select
+                        onChange={props.handleChange}
+                        id={book.id}
+                        value={book.shelf}
+                      >
                         <option value="none" disabled>
                           Move to...
                         </option>
@@ -33,7 +37,7 @@ function BookShelf(props) {
                     </div>
                   </div>
                   <div className="book-title">{book.title}</div>
-                  <div className="book-authors">{book.authors}</div>
+                  <div className="book-authors">{book.authors.toString()}</div>
                 </div>
               </li>
             ))}

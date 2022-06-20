@@ -7,6 +7,21 @@ function App() {
   const [showSearchPage, setShowSearchpage] = useState(false)
   const [books, setBooks] = useState([])
 
+  function handleChange(e) {
+    const { id, value } = e.target
+    let updatedBook = {}
+    books.forEach((book) => {
+      if (book.id === id) {
+        updatedBook = book
+      }
+    })
+    BooksApi.update(updatedBook, value)
+    setBooks((prevBooks) => {
+      return prevBooks.map((book) =>
+        book.id === id ? { ...book, shelf: value } : book
+      )
+    })
+  }
   useEffect(() => {
     const getBooks = async () => {
       const res = await BooksApi.getAll()
@@ -45,9 +60,21 @@ function App() {
           </div>
           <div className="list-books-content">
             <div>
-              <BookShelf books={books} shelf="currentlyReading" />
-              <BookShelf books={books} shelf="wantToRead" />
-              <BookShelf books={books} shelf="read" />
+              <BookShelf
+                books={books}
+                shelf="currentlyReading"
+                handleChange={handleChange}
+              />
+              <BookShelf
+                books={books}
+                shelf="wantToRead"
+                handleChange={handleChange}
+              />
+              <BookShelf
+                books={books}
+                shelf="read"
+                handleChange={handleChange}
+              />
             </div>
           </div>
           <div className="open-search">
