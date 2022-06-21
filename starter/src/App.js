@@ -1,89 +1,33 @@
 import "./App.css"
-import { useEffect, useState } from "react"
-import * as BooksApi from "./BooksAPI"
-import BookShelf from "./BookShelf"
+import React from "react"
+import { Route, Routes } from "react-router-dom"
+import Main from "./Main"
+import Search from "./Search"
 
 function App() {
-  const [showSearchPage, setShowSearchpage] = useState(false)
-  const [books, setBooks] = useState([])
+  // const [searchInput, setSearchInput] = useState("")
+  // const [searchBooks, setSearchBooks] = useState([])
 
-  function handleChange(e) {
-    const { id, value } = e.target
-    let updatedBook = {}
-    books.forEach((book) => {
-      if (book.id === id) {
-        updatedBook = book
-      }
-    })
-    BooksApi.update(updatedBook, value)
-    setBooks((prevBooks) => {
-      return prevBooks.map((book) =>
-        book.id === id ? { ...book, shelf: value } : book
-      )
-    })
-  }
-  useEffect(() => {
-    const getBooks = async () => {
-      const res = await BooksApi.getAll()
-      setBooks(res)
-    }
-    getBooks()
-  }, [])
+  // // update bookshelf status
+
+  // // handle search when user types on search field
+  // function handleSearch(e) {
+  //   setSearchInput(e.target.value)
+  // }
+
+  // useEffect(() => {
+  //   const searchBooks = async () => {
+  //     const res = await BooksApi.search(searchInput, 5)
+  //     setSearchBooks(res)
+  //   }
+  //   searchBooks()
+  // }, searchInput)
 
   return (
-    <div className="app">
-      {showSearchPage ? (
-        <div className="search-books">
-          <div className="search-books-bar">
-            <a
-              className="close-search"
-              onClick={() => setShowSearchpage(!showSearchPage)}
-            >
-              Close
-            </a>
-            <div className="search-books-input-wrapper">
-              <input
-                type="text"
-                placeholder="Search by title, author, or ISBN"
-              />
-            </div>
-          </div>
-          <div className="search-books-results">
-            <ol className="books-grid"></ol>
-          </div>
-        </div>
-      ) : (
-        <div className="list-books">
-          {console.log(books)}
-          <div className="list-books-title">
-            <h1>MyReads</h1>
-          </div>
-          <div className="list-books-content">
-            <div>
-              <BookShelf
-                books={books}
-                shelf="currentlyReading"
-                handleChange={handleChange}
-              />
-              <BookShelf
-                books={books}
-                shelf="wantToRead"
-                handleChange={handleChange}
-              />
-              <BookShelf
-                books={books}
-                shelf="read"
-                handleChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="open-search">
-            <a onClick={() => setShowSearchpage(!showSearchPage)}>Add a book</a>
-          </div>
-        </div>
-      )}
-    </div>
+    <Routes>
+      <Route exact path="/" element={<Main />} />
+      <Route path="/search" element={<Search />} />
+    </Routes>
   )
 }
-
 export default App
