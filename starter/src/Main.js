@@ -38,17 +38,36 @@ function Main() {
         </div>
         <div className="list-books-content">
           <div>
-            <BookShelf
-              books={books}
-              shelf="currentlyReading"
-              handleChange={handleChange}
-            />
-            <BookShelf
-              books={books}
-              shelf="wantToRead"
-              handleChange={handleChange}
-            />
-            <BookShelf books={books} shelf="read" handleChange={handleChange} />
+            <div className="bookshelf">
+              <h2 className="bookshelf-title">Currently Reading</h2>
+              <div className="bookshelf-books">
+                <BookShelf
+                  books={books}
+                  shelf="currentlyReading"
+                  handleChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="bookshelf">
+              <h2 className="bookshelf-title">Want To Read</h2>
+              <div className="bookshelf-books">
+                <BookShelf
+                  books={books}
+                  shelf="wantToRead"
+                  handleChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="bookshelf">
+              <h2 className="bookshelf-title">Read</h2>
+              <div className="bookshelf-books">
+                <BookShelf
+                  books={books}
+                  shelf="read"
+                  handleChange={handleChange}
+                />
+              </div>
+            </div>
           </div>
         </div>
         <div className="open-search">
