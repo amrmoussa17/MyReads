@@ -3,9 +3,7 @@ import BookShelf from "./BookShelf"
 import { Link } from "react-router-dom"
 import * as BooksApi from "./BooksAPI"
 
-function Main() {
-  const [books, setBooks] = React.useState([])
-
+function Main({ books, setBooks }) {
   React.useEffect(() => {
     const getBooks = async () => {
       const res = await BooksApi.getAll()

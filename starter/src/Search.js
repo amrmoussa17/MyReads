@@ -4,10 +4,8 @@ import * as BooksApi from "./BooksAPI"
 import SearchResults from "./SearchResults"
 import PropTypes from "prop-types"
 
-function Search() {
+function Search({ searchResults, setSearchResults }) {
   const [query, setQuery] = React.useState("")
-  const [searchResults, setSearchResults] = React.useState([])
-
   React.useEffect(() => {
     const search = async () => {
       const res = await BooksApi.search(query, 5)
@@ -32,7 +30,7 @@ function Search() {
       }
     })
     updatedBook.shelf = value
-    BooksApi.update(updatedBook, value)
+    BooksApi.update(updatedBook, 5)
   }
 
   return (
@@ -52,8 +50,10 @@ function Search() {
           </div>
         </div>
         <div className="search-books-results">
-          {SearchResults.length !== 0 &&
-            searchResults.constructor === Array && (
+          {query &&
+            searchResults !== undefined &&
+            searchResults.constructor === Array &&
+            searchResults.length !== 0 && (
               <SearchResults
                 books={searchResults}
                 handleChange={handleChange}
