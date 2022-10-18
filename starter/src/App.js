@@ -1,34 +1,12 @@
-import "./App.css"
-import React from "react"
-import { Route, Routes } from "react-router-dom"
-import Main from "./Main"
-import Search from "./Search"
+import "./App.css";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Main from "./Main";
+import Search from "./Search";
 
 function App() {
-  const [books, setBooks] = React.useState([])
-  const [searchResults, setSearchResults] = React.useState([])
-
-  React.useEffect(() => {
-    if (
-      searchResults !== undefined &&
-      searchResults.constructor === Array &&
-      searchResults.length !== 0
-    ) {
-      searchResults.forEach((result) => {
-        books.forEach((book) => {
-          if (result.id === book.id) {
-            return setSearchResults((prevResult) =>
-              prevResult.map((myBook) =>
-                myBook.id === book.id
-                  ? { ...myBook, shelf: book.shelf }
-                  : { ...myBook, shelf: "None" }
-              )
-            )
-          }
-        })
-      })
-    }
-  }, [searchResults])
+  const [books, setBooks] = React.useState([]);
+  const [searchResults, setSearchResults] = React.useState([]);
 
   return (
     <Routes>
@@ -43,10 +21,11 @@ function App() {
           <Search
             searchResults={searchResults}
             setSearchResults={setSearchResults}
+            books={books}
           />
         }
       />
     </Routes>
-  )
+  );
 }
-export default App
+export default App;

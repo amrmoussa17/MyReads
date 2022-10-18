@@ -1,9 +1,8 @@
-import React from "react"
+import React from "react";
 
 function SearchResults(props) {
   return (
     <ol className="books-grid">
-      {console.log(props.books)}
       {props.books.map((book) => (
         <li key={book.id}>
           <div className="book">
@@ -24,9 +23,7 @@ function SearchResults(props) {
                   id={book.id}
                   value={book.shelf}
                 >
-                  <option value="none" disabled>
-                    Move to...
-                  </option>
+                  <option disabled>Move to...</option>
                   <option value="currentlyReading">Currently Reading</option>
                   <option value="wantToRead">Want to Read</option>
                   <option value="read">Read</option>
@@ -42,7 +39,7 @@ function SearchResults(props) {
         </li>
       ))}
     </ol>
-  )
+  );
 }
 
-export default SearchResults
+export default SearchResults;
