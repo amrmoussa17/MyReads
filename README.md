@@ -1,5 +1,5 @@
 # MyReads Project
->This project is part of Udacity Professional web development Nano degree
+>This project is part of Udacity Advanced web development Nano degree
 
 ## Technologies used
 - React Framework
